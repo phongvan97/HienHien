@@ -8,7 +8,7 @@ using TayBac_28_06_17.Commons;
 
 namespace TayBac_28_06_17.Models.DBContext
 {
-    public class DbInit : DropCreateDatabaseAlways<TayBacDBContext>
+    public class DbInit : CreateDatabaseIfNotExists<TayBacDBContext>
     {
         protected override void Seed(TayBacDBContext context)
         {
