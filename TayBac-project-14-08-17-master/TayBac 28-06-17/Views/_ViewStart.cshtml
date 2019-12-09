@@ -1,0 +1,28 @@
+﻿
+@{
+
+    if (Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    if ((Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_ADMIN)
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    if ((Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_MANAGER)
+    {
+        Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+    }
+    if ((Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_STAFF)
+    {
+        Layout = "~/Views/Shared/_StaffLayout.cshtml";
+    }
+    if ((Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_DOCTOR)
+    {
+        Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+    }
+    if ((Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_PATIENT)
+    {
+        Layout = "~/Views/Shared/_PatientLayout.cshtml";
+    }
+}

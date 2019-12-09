@@ -1,0 +1,105 @@
+﻿@model List<TayBac_28_06_17.Models.EntityModels.benhnhan>
+
+@{
+    ViewBag.Title = "All patients";
+}
+@section Header{
+    Bệnh nhân
+}
+@section Script{
+    <script src="~/Scripts/Controller/LoadTable.js"></script>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="purple">
+                    <i class="material-icons">assignment</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">Danh sách bệnh nhân</h4>
+                    <div class="toolbar">
+                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline table-bordered" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 124px;" aria-sort="ascending">Id</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 245px;">Họ tên</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 245px;">Nghề nghiệp</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 144px;">Điện thoại</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 144px;">Email</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 192px;">Địa chỉ</th>
+
+                                    <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 138px;" aria-label="Actions: activate to sort column ascending">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var p in Model)
+                                {
+                                    <tr role="row" class="even">
+                                        <td tabindex="0" class="sorting_1">@p.idbn</td>
+                                        <td>@p.tenbn</td>
+                                        <td>@p.nghenghiep</td>
+                                        <td>@p.dienthoai</td>
+                                        <td>@p.email</td>
+                                        @{
+                                            var xa = ""; var huyen = ""; var tinh = "";
+                                            if (p.idxa != null)
+                                            {
+                                                xa = p.xa.tenxa;
+                                            }
+                                            if (p.huyen != null)
+                                            {
+                                                huyen = p.huyen.tenhuyen;
+                                            }
+                                            if (p.tinh != null)
+                                            {
+                                                tinh = p.tinh.tentinh;
+                                            }
+                                        }
+                                        <td>@xa - @huyen - @tinh</td>
+                                        <td class="text-right">
+                                            <a href="@Url.Action("Details", "Patient", new { @id = p.idbn.Trim() })" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-user"></i></a>
+                                            @if (
+                                (Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_ADMIN
+                                || ((Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_MANAGER
+                                    && (Session[TayBac_28_06_17.Commons.Constants.SESSION_HOSPITAL_ID] as string).Trim() == p.idbv.Trim())
+                                 )
+                                            {
+                                                <a href="@Url.Action("Edit", "Patient", new { @id = p.idbn.Trim() })" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-pencil"></i></a>
+                                                            <a href="@Url.Action("Delete", "Patient", new { @id = p.idbn.Trim() })" onclick="return confirm('Bạn thật sự muốn xóa người dùng id = @p.idbn')" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
+                                            }
+                                        </td>
+
+                                    </tr>
+
+                                            }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="1" colspan="1">Id</th>
+                                    <th rowspan="1" colspan="1">Họ tên</th>
+                                    <th rowspan="1" colspan="1">Nghề nghiệp</th>
+                                    <th rowspan="1" colspan="1">Điện thoại</th>
+                                    <th rowspan="1" colspan="1">Email</th>
+                                    <th rowspan="1" colspan="1">Địa chỉ</th>
+                                    <th class="text-right" rowspan="1" colspan="1">Actions</th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+
+                       
+                    </div>
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+        <!-- end col-md-12 -->
+    </div>
+    <!-- end row -->
+</div>

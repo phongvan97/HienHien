@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "uploadImg";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    xxxxx
+}
+<h2>uploadImg</h2>
+@using (Html.BeginForm("uploadImg", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h3>Upload img</h3>
+    <input type="file" name="img" />
+    <button type="submit">Upload</button>
+}
+<div>@ViewBag.img</div>
+<div> @ViewBag.W</div>
+<div>
+    @ViewBag.H
+</div>
+
+@if (ViewBag.I != null)
+{
+    <div class="row">
+        <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.I)" />
+    </div>
+}
+
+
+

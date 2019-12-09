@@ -1,0 +1,199 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Đăng nhập";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="~/Assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>@ViewBag.Title</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!--  Material Dashboard CSS    -->
+    <link href="~/Assets/css/material-dashboard.css" rel="stylesheet" />
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="~/Assets/css/demo.css" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
+</head>
+<body>
+    <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Hệ thống theo dõi sức khỏe</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="#">
+                            <i class="material-icons">fingerprint</i> Login
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            <i class="material-icons">lock_open</i> Lock
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper wrapper-full-page">
+        <div class="full-page login-page" filter-color="black" data-image="@Url.Content("~/Assets/img/login.jpeg")">
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+
+                            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="card card-login card-hidden">
+                                    <div class="card-header text-center" data-background-color="rose">
+                                        <h4 class="card-title">Xin chào</h4>
+                                    </div>
+                                    <p class="category text-center">
+                                        Chưa mã hóa mật khẩu
+                                    </p>
+
+                                    <p class="category text-center text-danger">@ViewBag.Err1</p>
+                                    <p class="category text-center text-danger">@ViewBag.Err2</p>
+                                    <div class="card-content">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">face</i>
+                                            </span>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tài khoản</label>
+                                                <input type="text" name="username" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">lock_outline</i>
+                                            </span>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Mật khẩu</label>
+                                                <input type="password" name="pass" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">group</i>
+                                            </span>
+
+                                            <select class="form-control" name="group" data-style="btn btn-primary btn-round" title="Quyền trong hệ thống" data-size="7" tabindex="-98">
+                                                <option value="@TayBac_28_06_17.Commons.Constants.G_ADMIN">Admin</option>
+                                                <option value="@TayBac_28_06_17.Commons.Constants.G_MANAGER">Quản lí</option>
+                                                <option value="@TayBac_28_06_17.Commons.Constants.G_STAFF">Nhân viên</option>
+                                                <option value="@TayBac_28_06_17.Commons.Constants.G_DOCTOR">Bác sĩ</option>
+                                                <option value="@TayBac_28_06_17.Commons.Constants.G_PATIENT">Bệnh nhân</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="footer text-center">
+                                        <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Đăng nhập</button>
+                                    </div>
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+
+                <div class="container">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    About web
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        <a href="#">Trường đại học Nguyễn Tất Thành</a>
+                    </p>
+                </div>
+            </footer>
+           
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="~/Assets/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="~/Assets/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="~/Assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/Assets/js/material.min.js" type="text/javascript"></script>
+<script src="~/Assets/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+<!-- Forms Validations Plugin -->
+<script src="~/Assets/js/jquery.validate.min.js"></script>
+<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+<script src="~/Assets/js/moment.min.js"></script>
+<!--  Charts Plugin -->
+<script src="~/Assets/js/chartist.min.js"></script>
+<!--  Plugin for the Wizard -->
+<script src="~/Assets/js/jquery.bootstrap-wizard.js"></script>
+<!--  Notifications Plugin    -->
+<script src="~/Assets/js/bootstrap-notify.js"></script>
+<!-- DateTimePicker Plugin -->
+<!-- <script src="~/Assets/js/bootstrap-datetimepicker.js"></script>    -->
+<!-- Vector Map plugin -->
+<!-- <script src="~/Assets/js/jquery-jvectormap.js"></script>    -->
+<!-- Sliders Plugin -->
+<script src="~/Assets/js/nouislider.min.js"></script>
+<!--  Google Maps Plugin    -->
+<!-- Select Plugin -->
+<script src="~/Assets/js/jquery.select-bootstrap.js"></script>
+<!--  DataTables.net Plugin    -->
+<!-- <script src="~/Assets/js/jquery.datatables.js"></script>      -->
+<!-- Sweet Alert 2 plugin -->
+<script src="~/Assets/js/sweetalert2.js"></script>
+<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<script src="~/Assets/js/jasny-bootstrap.min.js"></script>
+<!--  Full Calendar Plugin    -->
+<!--<script src="~/Assets/js/fullcalendar.min.js"></script>  -->
+<!-- TagsInput Plugin -->
+<script src="~/Assets/js/jquery.tagsinput.js"></script>
+<!-- Material Dashboard javascript methods -->
+<script src="~/Assets/js/material-dashboard.js"></script>
+<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+
+<script src="~/Assets/js/demo.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        demo.checkFullPageBackgroundImage();
+
+        setTimeout(function () {
+            // after 1000 ms we add the class animated to the login/register card
+            $('.card').removeClass('card-hidden');
+        }, 700)
+    });
+</script>
+</html>

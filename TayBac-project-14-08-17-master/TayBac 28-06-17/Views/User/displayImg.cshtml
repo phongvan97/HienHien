@@ -1,0 +1,153 @@
+﻿@model TayBac_28_06_17.Models.EntityModels.user
+
+@{
+    ViewBag.Title = "displayImg";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    display img
+    }
+<h2>displayImg</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idbv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idbv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tennd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tennd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaysinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaysinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dienthoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dienthoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chucvu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chucvu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donvi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donvi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kieuuser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kieuuser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updatetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updatetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idxa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idxa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idhuyen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idhuyen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idtinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idtinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangthai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangthai)
+        </dd>
+
+   
+    </dl>
+    <div class="row">
+        <img src="data:image;base64,@System.Convert.ToBase64String(Model.image)" />
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idnd }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

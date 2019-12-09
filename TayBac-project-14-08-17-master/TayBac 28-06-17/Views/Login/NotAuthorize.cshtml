@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "NotAuthorize";
+
+}
+@section Header {
+    Authorize
+}
+
+<h2>NotAuthorize : Bạn không có quyền truy cập chức năng này !</h2>
+@if (Session[TayBac_28_06_17.Commons.Constants.SESSION_ID] == null)
+{
+    <a href="@Url.Action("Index","Login")">Đăng nhập</a>
+}
+

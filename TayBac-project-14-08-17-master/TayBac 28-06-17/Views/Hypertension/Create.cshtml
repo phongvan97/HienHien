@@ -1,0 +1,766 @@
+﻿@model IEnumerable<object>
+@*@model TayBac_28_06_17.Models.EntityModels.HuyetapViewModel*@
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_MasterLayout_Temp.cshtml";
+    List<TayBac_28_06_17.Models.EntityModels.benhvien> hps = Model.ToList()[0] as List<TayBac_28_06_17.Models.EntityModels.benhvien>;
+    TayBac_28_06_17.Models.EntityModels.huyetap ha = Model.ToList()[1] as TayBac_28_06_17.Models.EntityModels.huyetap;
+    TayBac_28_06_17.Models.EntityModels.benhnhan pa = Model.ToList()[2] as TayBac_28_06_17.Models.EntityModels.benhnhan;
+
+    List<TayBac_28_06_17.Models.EntityModels.khoa> khs = Model.ToList()[3] as List<TayBac_28_06_17.Models.EntityModels.khoa>;
+    List<TayBac_28_06_17.Models.EntityModels.giuong> gis = Model.ToList()[4] as List<TayBac_28_06_17.Models.EntityModels.giuong>;
+
+}
+@section Header{
+    Hệ thống theo dõi sức khỏe ❯ Tăng huyết áp ❯ Thêm mới
+}
+@*<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container-fluid">
+        <div class="navbar-minimize">
+            <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                <i class="material-icons visible-on-sidebar-regular">more_vert</i>
+                <i class="material-icons visible-on-sidebar-mini">view_list</i>
+            </button>
+        </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> Hệ thống theo dõi sức khỏe ❯ Tăng huyết áp ❯ Thêm mới</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">dashboard</i>
+                        <p class="hidden-lg hidden-md">Dashboard</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">notifications</i>
+                        <span class="notification">5</span>
+                        <p class="hidden-lg hidden-md">
+                            Notifications
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">Mike John responded to your email</a>
+                        </li>
+                        <li>
+                            <a href="#">You have 5 new tasks</a>
+                        </li>
+                        <li>
+                            <a href="#">You're now friend with Andrew</a>
+                        </li>
+                        <li>
+                            <a href="#">Another Notification</a>
+                        </li>
+                        <li>
+                            <a href="#">Another One</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">person</i>
+                        <p class="hidden-lg hidden-md">Profile</p>
+                    </a>
+                </li>
+                <li class="separator hidden-lg hidden-md"></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group form-search is-empty">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                </div>
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>*@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <ul class="nav nav-pills nav-pills-rose nav-stacked">
+                                    <li class="active">
+                                        <a href="#tab1" data-toggle="tab">Phần hành chính</a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab2" data-toggle="tab">Lý do vào viện</a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab3" data-toggle="tab">Hỏi bệnh</a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab4" data-toggle="tab">Khám bệnh</a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab5" data-toggle="tab">Xét nghiệm thường quy</a>
+                                    </li>
+                                    @*<li>
+                                            <a href="#tab6" data-toggle="tab">Xét nghiệm chuyên sâu</a>
+                                        </li>*@
+                                </ul>
+                            </div>
+                            <div class="col-md-10">
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Bệnh viện</label>
+                                                        <select id="pa_idbv" name="pa.idbv" class="form-control">
+                                                            @foreach (var item in hps)
+                                                            {
+                                                                <option value="@item.idbv">@item.tenbv</option>
+                                                            }
+                                                        </select>
+                                                        @*<input type="text" class="form-control">*@
+                                                        @*@Html.TextBoxFor(model => hpvm.tenbv, new { @class = "form-control" })*@
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Khoa</label>
+                                                        <select id="pa_idkhoa" name="pa.idkhoa" class="form-control">
+                                                            @foreach (var item in khs)
+                                                            {
+                                                                <option value="@item.idkhoa">@item.tenkhoa</option>
+                                                            }
+                                                        </select>
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Giường</label>
+                                                        <select id="pa_idgiuong" name="pa.idgiuong" class="form-control">
+                                                            @foreach (var item in gis)
+                                                            {
+                                                                <option value="@item.idgiuong">@item.idgiuong</option>
+                                                            }
+                                                        </select>
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Số lưu trữ</label>
+                                                        <input type="text" class="form-control">
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Mã Y tế</label>
+                                                        <input type="text" class="form-control">
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Họ và tên</label>
+                                                        @Html.TextBoxFor(model => pa.tenbn, new { @class = "form-control" })
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Sinh ngày</label>
+                                                        @Html.TextBoxFor(model => pa.ngaysinh, new { @class = "form-control" })
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--tab of ly do vao vien-->
+                                        <div class="tab-pane" id="tab2">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label">Lý do vào viện</label>
+                                                @*<textarea class="form-control" rows="5"></textarea>*@
+                                                @Html.TextAreaFor(model => ha.HA_I, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                        </div>
+                                        <!--tab of hoi benh-->
+                                        <div class="tab-pane" id="tab3">
+                                            <h4>A. Bệnh sử</h4>
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label">( Khởi phát, diễn biến, chẩn đoán, điều trị của tuyến dưới; lưu ý: tăng huyết áp ở người có tuổi hay người trẻ tuổi, tăng huyết áp từng cơn, tăng huyết áp ở người đái tháo đường, ở người có rối loạn lipit máu không?)</label>
+                                                @Html.TextAreaFor(model => ha.HA_II_A, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <h4>B. Tiền sử</h4>
+                                            <h5>* Bản thân</h5>
+                                            <div class="form-group">
+                                                <label class="control-label">1.	Bản thân có mắc bệnh đái tháo đường không, rối loạn lipit máu, bệnh mạch vành, bệnh thận, có hút thuốc lá không?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_1, "true") Có
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_1, "false") Không
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => ha.HA_II_B_1_1, new { @class = "form-control", @placeholder = "Diễn giải" })
+                                                    </div>
+                                                </div>
+
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">2.	Có dùng các thuốc gì? Thuốc nội tiết. thuốc cường giao cảm, salbutamol, costisol</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_2, "true") Có
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_2, "false") Không
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => ha.HA_II_B_2_1, new { @class = "form-control", @placeholder = "Diễn giải" })
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">3.	Có thừa cân, béo phì (chiều cao, cân nặng BMI), lối sống ít vận động, ăn uống có thể  liên quan đến tăng huyết áp.</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_3, "true") Có
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_3, "false") Không
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => ha.HA_II_B_3_1, new { @class = "form-control", @placeholder = "Diễn giải" })
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">4.	Nếu là nữ có thai hay không?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_4, "true") Có
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_4, "false") Không
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => ha.HA_II_B_4_1, new { @class = "form-control", @placeholder = "Diễn giải" })
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">5.	Tuổi xuất hiện cao huyết áp?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_4, "true") Có
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_4, "false") Không
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => ha.HA_II_B_4_1, new { @class = "form-control", @placeholder = "Diễn giải" })
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <h5>* Tiểu sử gia đình</h5>
+                                            <div class="form-group">
+                                                <label class="control-label">6.	Gia đình có ai mắc bệnh mãn tính gì không?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_6, "true") Có
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_II_B_6, "false") Không
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => ha.HA_II_B_6_1, new { @class = "form-control", @placeholder = "Diễn giải" })
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                        </div>
+                                        <!--tab of kham benh-->
+                                        <div class="tab-pane" id="tab4">
+                                            <h5>1. Toàn thân</h5>
+                                            <div class="form-group">
+                                                <label class="control-label">Mạch</label>
+                                                @Html.TextBoxFor(model => ha.HA_III_1_1, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Nhiệt độ</label>
+                                                @Html.TextBoxFor(model => ha.HA_III_1_2, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Huyết áp</label>
+                                                @Html.TextBoxFor(model => ha.HA_III_1_3_1, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Chỉ số huyết áp</label>
+                                                @Html.TextBoxFor(model => ha.HA_III_1_3_2, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Nhịp thở</label>
+                                                @Html.TextBoxFor(model => ha.HA_III_1_4, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Cân nặng</label>
+                                                @Html.TextBoxFor(model => ha.HA_III_1_5, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Chiều cao</label>
+                                                @Html.TextBoxFor(model => ha.HA_III_1_6, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <h5>2. Khám các bộ phận</h5>
+                                            <div class="form-group">
+                                                <label class="control-label">Tim mạch, thận, mắt, não: (tìm tổn thương cơ quan đích do tăng huyết áp)</label>
+                                                @Html.TextAreaFor(model => ha.HA_III_2, new { @class = "form-control" })
+                                                <span class="material-input"></span>
+                                            </div>
+                                        </div>
+                                        <!--tab of xet nghiem thuong quy-->
+                                        <div class="tab-pane" id="tab5">
+                                            <h5>Công thức máu: xem hồng cầu, bạch cầu, hemoglobin</h5>
+                                            <div class="form-group">
+                                                <label class="control-label"></label>
+                                                @Html.TextBoxFor(model => ha.HA_IV_1, new { @class = "form-control" })
+                                            </div>
+                                            <h5>Sinh hóa máu</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Glucose máu</label>
+                                                        @Html.TextBoxFor(model => ha.HA_IV_2, new { @class = "form-control" })
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Acid uric</label>
+                                                        @Html.TextBoxFor(model => ha.HA_IV_3, new { @class = "form-control" })
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Ure</label>
+                                                        @Html.TextBoxFor(model => ha.HA_IV_4, new { @class = "form-control" })
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Creatinin</label>
+                                                        @Html.TextBoxFor(model => ha.HA_IV_5, new { @class = "form-control" })
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">CRP</label>
+                                                        @Html.TextBoxFor(model => ha.HA_IV_6, new { @class = "form-control" })
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5>Chỉ số xét nghiệm đánh giá rối loạn lipit máu</h5>
+                                            <div class="form-group">
+                                                <label class="control-label">7.	Cholesteol bao nhiêu?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_7, "true") Cao
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_7, "false") Bình thường
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">8.	Triglycerid bao nhiêu?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_8, "true") Cao
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_8, "false") Bình thường
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">9.	HDL-C bao nhiêu?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_9, "true") Bình thường
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_9, "false") Không bình thường
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">10.	LDL-C bao nhiêu?</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_10, "true") Cao hơn bình thường
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_10, "false") Bình thường
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">11.	XN: Điện giải đồ Na;   Kali</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_11, "true") Kali máu hạ
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_11, "false") Kali máu bình thường
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">12.	X-quang tim phổi:</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_12, "true") Bình thường
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_12, "false") Không bình thường
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">13.	Điện tâm đồ:</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_13, "true") Bình thường
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_13, "false") Bất thường
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">14.	Tổng phân tích nước tiểu:</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_14, "true") Bình thường
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline">
+                                                            @Html.RadioButtonFor(model => ha.HA_IV_14, "false") Không bình thường
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="material-input"></span>
+                                            </div>
+                                        </div>
+                                        <!--tab of xet nghiem chuyen sau-->
+                                        @*<div class="tab-pane" id="tab6">
+                                                <h6>Phối hợp xét nghiệm cơ bản và xét nghiệm chuyên sâu tìm nguyên nhân tăng huyết áp (THA)</h6>
+                                                <h6>THA do thận:  Viêm cầu thận cấp, mạn</h6>
+                                                <div class="form-group">
+                                                    <label class="control-label">15.	Xét nghiệm: siêu âm thận và hệ tiết niệu:</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_15, "true") Bình thường
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_15, "false") Không bình thường
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">16.	Xét nghiệm: Siêu âm doppler động mạch thận xem có hẹp động mạch thận</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_16, "true") Bình thường
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_16, "false") Hẹp động mạch thận
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">17.	Chụp động mạch thận cản quang ( nếu siêu âm có hẹp động mạch thận )</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_17, "true") Bình thường
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_17, "false") Hẹp động mạch thận
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">18.	Siêu âm tim: xem có hẹp eo động mạch chủ, hở van động mạch chủ, dầy thất trái</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_18, "true") Bình thường
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_18, "false") Không bình thường
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">19.	Định lượng cortisol niệu/24 giờ: trong hội chứng cushing không phụ thuộc ACTH nội sinh bình thường cortisol niệu <250nmol />24 giờ (giới hạn chẩn đoán bệnh cortisol niệu >830nmol/24 giờ).</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_19, "true") Bình thường
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_19, "false") Bệnh
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">20.	Xét nghiệm chụp cắt lớp vi tính( CT ) hoặc MRI tuyến thượng thận có thể phát hiện thấy u hoặc phì đại tuyến thượng thận.</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_20, "true") Bình thường
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_20, "false") Có u tuyến thượng thận
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">21.	Xét nghiệm nước tiểu: định lượng catecholamine tự do trong nước tiểu (ngưỡng chẩn đoán > 1480nmol/ 24 giờ) ( >250µg/24 giờ)</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_21, "true") Bình thường
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_21, "false") Có u tuyến thượng thận
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">22.	Xét nghiệm siêu âm ổ bụng: phát hiện u kích thước lớn</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_22, "true") Có khối u
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_22, "false") Không
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">23.	Chụp cắt lớp vi tính ( CT ) hoặc PET scan: tìm khối u kích thước >0,5 – 1cm  trong thượng thận và tìm di căn > 1 – 2cm trong ổ bụng và khung chậu</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_23, "true") Có khối u tủy thượng thận
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_23, "false") Không có
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">24.	Soi đáy mắt xem có xuất huyết võng mạc, xuất huyết dịch kính</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_24, "true") Có
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_24, "false") Không
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">25.	Tăng huyết áp do thuốc: có dùng thuốc nội tiết, thuốc cường giao cảm, Salbutamol……</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_25, "true") Có
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="radio-inline">
+                                                                @Html.RadioButtonFor(model => hpvm.HA_V_25, "false") Không
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                            </div>*@
+                                        <input type="submit" value="Thêm" class="btn btn-success pull-right" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#pa_ngaysinh').datetimepicker({ viewMode: 'years', format: 'YYYY-MM-DD' });
+        });
+    </script>
+}

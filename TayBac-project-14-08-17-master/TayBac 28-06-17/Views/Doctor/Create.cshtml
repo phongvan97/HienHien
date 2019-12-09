@@ -1,0 +1,165 @@
+﻿@model TayBac_28_06_17.Models.EntityModels.bacsy
+
+@{
+    ViewBag.Title = "Create doctor";
+    // Layout = "~/Views/Layouts/_AdminLayout.cshtml";
+}
+@section Header{
+    Tài khoản người dùng
+}
+@section Script{
+    <script src="~/Scripts/Controller/LoadAddress.js"></script>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="rose">
+                    <i class="material-icons">perm_identity</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">
+                        Tạo tài khoản
+                        <small class="text-success"> @ViewBag.Susscess</small>
+                        <small class="text-danger"> @Html.ValidationSummary(true)</small>
+                    </h4>
+                    @using (Html.BeginForm("Create", "Doctor", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Id bác sĩ @Html.ValidationMessageFor(model => model.idbsy)</label>
+                                    <span class="form-control" disabled>@ViewBag.id</span>
+                                    @Html.TextBoxFor(model => model.idbsy, new { @class = "form-control", @type = "hidden", @Value= ViewBag.id })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Mật khẩu @Html.ValidationMessageFor(model => model.pass)</label>
+                                    @Html.TextBoxFor(model => model.pass, new { @class = "form-control", @type = "password"})
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group is-empty">
+
+                                    <label class="control-label">Họ tên @Html.ValidationMessageFor(model => model.tenbs)</label>
+                                    @Html.TextBoxFor(model => model.tenbs, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="label-control">Ngày sinh @Html.ValidationMessageFor(model => model.ngaysinh)</label>
+                                    @Html.TextBoxFor(model => model.ngaysinh, new { @class = "form-control datepicker" })
+                                    <span class="material-input"></span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Email @Html.ValidationMessageFor(model => model.email)</label>
+                                    @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Điện thoại @Html.ValidationMessageFor(model => model.dienthoai)</label>
+                                    @Html.TextBoxFor(model => model.dienthoai, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Tỉnh / TP @Html.ValidationMessageFor(model => model.idtinh)</label>
+                                    @Html.DropDownListFor(model => model.idtinh, new SelectList(ViewBag.getListTinhs, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Quận / Huyện @Html.ValidationMessageFor(model => model.idhuyen)</label>
+                                    @Html.DropDownListFor(model => model.idhuyen, new SelectList(ViewBag.getListHuyens, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Xã / phường @Html.ValidationMessageFor(model => model.idxa)</label>
+                                    @Html.DropDownListFor(model => model.idxa, new SelectList(ViewBag.getListXas, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Đơn vị @Html.ValidationMessageFor(model => model.donvi)</label>
+                                    @Html.TextBoxFor(model => model.donvi, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group is-empty">
+                                    <label class="control-label">Chức vụ @Html.ValidationMessageFor(model => model.chucvu)</label>
+                                    @Html.TextBoxFor(model => model.chucvu, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                        </div><div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group is-empty">
+                                    <label class="control-label"> @Html.ValidationMessageFor(model => model.idbv)</label>
+                                    @if ((Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string) == TayBac_28_06_17.Commons.Constants.G_ADMIN)
+                                    {
+                                        @Html.DropDownListFor(model => model.idbv, new SelectList(ViewBag.getListHospitals, "Value", "Text"), new { @class = "form-control" })
+                                    }
+                                    else
+                                    {
+                                        <div class="row" hidden>
+                                            @Html.TextBoxFor(model => model.idbv, new { @type = "hidden", @Value = Session[TayBac_28_06_17.Commons.Constants.SESSION_HOSPITAL_ID] })
+                                        </div>
+                                        <label disabled class="form-control">@Session[TayBac_28_06_17.Commons.Constants.SESSION_HOSPITAL_NAME]</label>
+                                    }
+                                    <span class="material-input"></span>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <button type="submit" style="margin-top:30px" class="btn btn-rose pull-right col-md-4">Tạo tài khoản</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="@Url.Action(actionName: "Alls", controllerName: "Doctor")">Back to List</a>
+    </div>
+
+</div>

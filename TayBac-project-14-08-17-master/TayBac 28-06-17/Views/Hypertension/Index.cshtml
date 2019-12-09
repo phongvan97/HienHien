@@ -1,0 +1,259 @@
+﻿@model IEnumerable<TayBac_28_06_17.Models.EntityModels.HuyetapViewModel>
+@{
+    ViewBag.Title = "Danh sách các bệnh nhân tăng huyết áp";
+    //Layout = "~/Views/Shared/_MasterLayout_Temp.cshtml";
+
+}
+@section Header{
+   Hệ thống theo dõi sức khỏe ❯ Tăng huyết áp
+}
+@*<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container-fluid">
+        <div class="navbar-minimize">
+            <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                <i class="material-icons visible-on-sidebar-regular">more_vert</i>
+                <i class="material-icons visible-on-sidebar-mini">view_list</i>
+            </button>
+        </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> Hệ thống theo dõi sức khỏe ❯ Tăng huyết áp</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">dashboard</i>
+                        <p class="hidden-lg hidden-md">Dashboard</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">notifications</i>
+                        <span class="notification">5</span>
+                        <p class="hidden-lg hidden-md">
+                            Notifications
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">Mike John responded to your email</a>
+                        </li>
+                        <li>
+                            <a href="#">You have 5 new tasks</a>
+                        </li>
+                        <li>
+                            <a href="#">You're now friend with Andrew</a>
+                        </li>
+                        <li>
+                            <a href="#">Another Notification</a>
+                        </li>
+                        <li>
+                            <a href="#">Another One</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">person</i>
+                        <p class="hidden-lg hidden-md">Profile</p>
+                    </a>
+                </li>
+                <li class="separator hidden-lg hidden-md"></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group form-search is-empty">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                </div>
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>*@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-content text-center">
+                        <button class="btn btn-info" onclick="window.location.href = '@Url.Action("Create","Hypertension")'">Thêm hồ sơ bệnh</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-content text-center">
+                        <button class="btn btn-success" onclick="window.location.href = '@Url.Action("Import","Hypertension")'">Import</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Hồ sơ</h4>
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Mã BN</th>
+                                        <th>Tên BN</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Giới tính</th>
+                                        <th>Dân tộc</th>
+                                        <th>Mã HS</th>
+                                        <th class="disabled-sorting text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Mã BN</th>
+                                        <th>Tên BN</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Giới tính</th>
+                                        <th>Dân tộc</th>
+                                        <th>Mã HS</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.idbn</td>
+                                            <td>@item.tenbn</td>
+                                            <td>@item.ngaysinh.ToString()</td>
+                                            <td>
+                                                @if (item.gioitinh == true)
+                                                {
+                                                    <p>Nam</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>Nữ</p>
+                                                }
+                                            </td>
+                                            <td>@item.dantoc</td>
+                                            <td>@item.idhuyetap</td>
+                                            <td class="text-right">
+                                                <a href="#" class="btn btn-simple btn-warning btn-icon edit" onclick="Edit"><i class="material-icons">dvr</i></a>
+                                                <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+            // Edit record
+            table.on('click', '.edit', function () {
+                $tr = $(this).closest('tr');
+
+                var data = table.row($tr).data();
+                //alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+                window.location.href = "@Url.Action("Edit", "Hypertension")" + "/" + data[5];
+            });
+
+            // Delete a record
+            table.on('click', '.remove', function (e) {
+                $tr = $(this).closest('tr');
+                //table.row($tr).remove().draw();
+                var data = table.row($tr).data();
+                //alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+                swal({
+                    title: 'Are you sure?',
+                    text: 'You will not be able to recover this imaginary file!',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, keep it',
+                    confirmButtonClass: "btn btn-success",
+                    cancelButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                }).then(function () {
+                    console.log("code delete at here");
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("Delete", "Hypertension")" + "/" + data[5],
+                        ajaxasync: true,
+                        success: function () {
+                            swal({
+                                title: 'Deleted!',
+                                text: 'Record has been deleted.',
+                                type: 'success',
+                                confirmButtonClass: "btn btn-success",
+                                buttonsStyling: false
+                            })
+                            table.row($tr).remove().draw();
+                        },
+                        error: function (data) {
+                            alert(data.x);
+                        }
+                    });
+
+                }, function (dismiss) {
+                    // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                    if (dismiss === 'cancel') {
+                        swal({
+                            title: 'Cancelled',
+                            text: 'Your imaginary file is safe :)',
+                            type: 'error',
+                            confirmButtonClass: "btn btn-info",
+                            buttonsStyling: false
+                        })
+                    }
+                })
+                e.preventDefault();
+            });
+
+            //Like record
+            table.on('click', '.like', function () {
+                alert('You clicked on Like button');
+            });
+
+            $('.card .material-datatables label').addClass('form-group');
+        });
+    </script>
+}

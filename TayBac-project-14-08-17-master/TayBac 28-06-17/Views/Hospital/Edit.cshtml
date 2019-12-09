@@ -1,0 +1,127 @@
+﻿@model TayBac_28_06_17.Models.EntityModels.benhvien
+
+@{
+    ViewBag.Title = "Edit hopital";
+    //Layout = "~/Views/Layouts/_AdminLayout.cshtml";
+}
+@section Header{
+    Bệnh viện
+}
+@section Script{
+    <script src="~/Scripts/Controller/LoadAddress.js"></script>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                @using (Html.BeginForm("Edit", "Hospital", FormMethod.Post, new { @id = "TypeValidation", @class = "form-horizontal", @novalidate = "novalidate" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="card-header card-header-text" data-background-color="rose">
+                        <h4 class="card-title">Sửa thông tin bệnh viện</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row" hidden>
+                            @Html.TextBoxFor(model => model.idbv, new { @value = Model.idbv, @type = "hidden" })
+
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Tên bệnh</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.tenbv, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.tenbv)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Điện thoại</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+
+                                    @Html.TextBoxFor(model => model.dienthoai, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.dienthoai)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Fax</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.fax, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.fax)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Địa chỉ IP</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.IP, new { @class = "form-control" })
+
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.IP)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Địa chỉ</label>
+                            <div class="col-sm-2">
+                                <div class="form-group label-floating column-sizing is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.idtinh, new SelectList(ViewBag.getListTinhs, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                <div class="form-group label-floating column-sizing is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.idhuyen, new SelectList(ViewBag.getListHuyens, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group label-floating column-sizing is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.idxa, new SelectList(ViewBag.getListXas, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code></code>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-rose btn-fill">Cập nhập</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <a href="@Url.Action(actionName: "Alls", controllerName: "Hospital")">Back to List</a>
+    </div>
+</div>

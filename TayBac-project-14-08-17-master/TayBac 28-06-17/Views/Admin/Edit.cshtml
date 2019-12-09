@@ -1,0 +1,148 @@
+﻿@model TayBac_28_06_17.Models.EntityModels.User
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Admin/_UserLayout.cshtml";
+}
+@section Header{
+    User - Edit
+}
+
+<h2>Edit</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @id = "TypeValidation", @class = "form-horizontal", @novalidate = "novalidate" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="card-header card-header-text" data-background-color="rose">
+                        <h4 class="card-title">Sửa thông tin tài khoản</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Họ tên</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.tennd, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.tennd)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Điện thoại</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+
+                                    @Html.TextBoxFor(model => model.dienthoai, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.dienthoai)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Email</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.email)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Ngày sinh</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.ngaysinh, new { @class = "form-control datepicker" })
+                                 
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.ngaysinh)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Bệnh viện</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.idbv, new SelectList(ViewBag.getListHospitals, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.idbv)</code>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Chức vụ</label>
+                            <div class="col-sm-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.chucvu, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code>@Html.ValidationMessageFor(model => model.chucvu)</code>
+                            </label>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Địa chỉ</label>
+                            <div class="col-sm-2">
+                                <div class="form-group label-floating column-sizing is-empty">
+                                    <label class="control-label"></label>
+
+                                    @Html.TextBoxFor(model => model.xa, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group label-floating column-sizing is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.huyen, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group label-floating column-sizing is-empty">
+                                    <label class="control-label"></label>
+                                    @Html.TextBoxFor(model => model.tinh, new { @class = "form-control" })
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                            </div>
+                            <label class="col-sm-3 label-on-right">
+                                <code></code>
+                            </label>
+                        </div>
+                    </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-rose btn-fill">Cập nhập</button>
+                        </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+
+</div>

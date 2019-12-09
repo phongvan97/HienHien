@@ -1,0 +1,94 @@
+﻿
+@{
+
+    var index = Session[TayBac_28_06_17.Commons.Constants.SESSION_ID] as string;
+}
+
+@section Header{
+    Trang chủ
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="title text-center">Danh sách tác vụ</h3>
+            <br>
+            <div class="nav-center">
+                <ul class="nav nav-pills nav-pills-warning nav-pills-icons" role="tablist">
+                    <!--
+                        color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                    -->
+                    <li class="active">
+                        <a href="#description-1" role="tab" data-toggle="tab" aria-expanded="true">
+                            <i class="material-icons">person</i>Cá nhân
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#schedule-1" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="material-icons">local_hospital</i> Bệnh viện
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#description-2" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="material-icons">account_box</i> Nhân viên
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#tasks-1" role="tab" data-toggle="tab" aria-expanded="true">
+                            <i class="material-icons">account_box</i>  Bác sĩ
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#tasks-2" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="material-icons">accessible</i> Bệnh nhân
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content active">
+                <div class="tab-pane active" id="description-1">
+                    <div class="card">
+                        <div class="card-content">
+                            <a class="btn btn-info" href="@Url.Action("Details", "User", new { @id = index.Trim()})">Thông tin cá nhân</a>
+                            <a class="btn btn-success" href="@Url.Action("Edit", "User", new { @id = index.Trim() }, null)">Sửa thông tin cá nhân</a>
+                            <a class="btn btn-warning" href="@Url.Action("ChangePass", "User", new { @id = index.Trim() }, null)">Thay đổi mật khẩu</a>
+                            <a class="btn btn-danger" href="@Url.Action("Logout", "Login")">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="schedule-1">
+                    <div class="card">
+                        <div class="card-content">
+                            <a href="@Url.Action("Alls","Hospital")" class="btn btn-info">Danh sách bệnh viện</a>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="description-2">
+                    <div class="card">
+                        <div class="card-content">
+                            <a href="@Url.Action("Alls","User")" class="btn btn-info">Danh sách nhân viên</a>
+                            <a href="@Url.Action("Create","User")" class="btn btn-success">Tạo tài khoản nhân viên</a>
+                            <a href="@Url.Action("Alls","User")" class="btn btn-warning">Sửa / xóa nhân viên</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tasks-1">
+                    <div class="card">
+                        <a href="@Url.Action("Alls","Doctor")" class="btn btn-info">Danh sách bác sĩ</a>
+                        <a href="@Url.Action("Create","Doctor")" class="btn btn-success">Tạo tài khoản bác sĩ</a>
+                        <a href="@Url.Action("Alls","Doctor")" class="btn btn-warning">Sửa / xóa bác sĩ</a>
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="tasks-2">
+                    <div class="card">
+                        <a href="@Url.Action("Alls","Patient")" class="btn btn-info">Danh sách bệnh nhân</a>
+                        <a href="@Url.Action("Create","Patient")" class="btn btn-success">Tạo tài khoản bệnh nhân</a>
+                        <a href="@Url.Action("Alls","Patient")" class="btn btn-warning">Sửa / xóa bệnh nhân</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

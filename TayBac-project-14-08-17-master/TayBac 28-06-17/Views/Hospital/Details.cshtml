@@ -1,0 +1,146 @@
+﻿@model TayBac_28_06_17.Models.EntityModels.benhvien
+
+@{
+  
+    var xa = ""; var huyen = ""; var tinh = "";
+    if (Model.idxa != null)
+    {
+        xa = Model.xa.tenxa;
+    }
+    if (Model.huyen != null)
+    {
+        huyen = Model.huyen.tenhuyen;
+    }
+    if (Model.tinh != null)
+    {
+        tinh = Model.tinh.tentinh;
+    }
+    bool check = false;
+    if (Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string == TayBac_28_06_17.Commons.Constants.G_ADMIN)
+    {
+        check = true;
+    }
+}
+@section Header{
+    Bệnh viện
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="rose">
+                    <i class="material-icons">perm_identity</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">
+                        Chi tiết tài khoản
+                    </h4>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group ">
+                                <label class="control-label">Id bệnh viện</label>
+                                <input type="text" class="form-control" disabled value="@Model.idbv">
+
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">Tên bệnh viện</label>
+                                <input type="text" class="form-control" disabled value="@Model.tenbv">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Địa chỉ Ip</label>
+                                <input type="email" class="form-control" disabled value="@Model.IP">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Xã</label>
+                                <input type="text" class="form-control" disabled="" value="@xa">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Huyện</label>
+                                <input type="text" class="form-control" disabled="" value="@huyen">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Tỉnh</label>
+                                <input type="text" class="form-control" disabled="" value="@tinh">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Số điện thoại</label>
+                                <input type="text" class="form-control" disabled="" value="@Model.dienthoai">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Fax</label>
+                                <input type="text" class="form-control" disabled="" value="@Model.fax">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Chỉnh sửa gần nhất</label>
+                                <input type="text" class="form-control" disabled="" value="@Model.updatetime">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Địa chỉ</label>
+                                <input type="text" class="form-control" disabled="" value="@Model.diachi">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Trạng thái</label>
+                                <input type="text" class="form-control" disabled="" value="@Model.trangthai">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label"></label>
+                                @if (check)
+                                {
+                                    <a href="@Url.Action("Edit", "Hospital", new { @id = Model.idbv.Trim() })" style="margin-top:25px" class="btn btn-rose pull-right">Chỉnh sửa</a>
+                                }
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                 
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="@Url.Action(actionName: "Alls", controllerName: "Doctor")">Back to List</a>
+    </div>
+</div>

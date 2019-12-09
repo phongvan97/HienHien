@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Change pass";
+    //Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+@section Header {
+    Tài khoản người dùng
+}
+<h2>ChangePass</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                @using (Html.BeginForm("ChangePass", "Doctor", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">mail_outline</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Thay đổi mật khẩu</h4>
+                        <small class="text-success">@ViewBag.Success</small>
+                        <small class="text-danger">@ViewBag.Err4</small>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">
+                                Mật khẩu hiện tại
+                                <small class="text-danger">@ViewBag.Err3</small>
+                            </label>
+                            <input class="form-control" name="oldPass" type="password" required="true" aria-required="true">
+                            <span class="material-input"></span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">
+                                Mật khẩu mới
+                                <small class="text-danger">@ViewBag.Err1</small>
+                            </label>
+                            <input class="form-control" name="newPass1" type="password" required="true" aria-required="true">
+                            <span class="material-input"></span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">
+                                Nhập lại
+                                <small class="text-danger">@ViewBag.Err2</small>
+                            </label>
+                            <input class="form-control" name="newPass2" type="password" required="true" aria-required="true">
+                            <span class="material-input"></span>
+                        </div>
+                        <div class="form-footer text-right">
+                            <button type="submit" class="btn btn-rose btn-fill">Thay đổi</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

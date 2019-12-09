@@ -1,0 +1,116 @@
+﻿@model List<TayBac_28_06_17.Models.EntityModels.benhvien>
+
+@{
+    ViewBag.Title = "All hopitals";
+    bool check = false;
+    if (Session[TayBac_28_06_17.Commons.Constants.SESSION_GROUPID] as string == TayBac_28_06_17.Commons.Constants.G_ADMIN)
+    {
+        check = true;
+    }
+}
+@section Header{
+    Bệnh viện
+}
+@section Script{
+    <script src="~/Scripts/Controller/LoadTable.js"></script>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="purple">
+                    <i class="material-icons">assignment</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">Tất cả bệnh viện</h4>
+                    <div class="toolbar">
+                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline table-bordered" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending">Id</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 270px;">Bệnh viện</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;">Địa chỉ ip</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 124px;">Điện thoại</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 114px;">Fax</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 255px;">Xã - Huyện - Tỉnh</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 255px;">Địa chỉ</th>
+                                    <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 50px;" aria-label="Actions: activate to sort column ascending">Status</th>
+                                    <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;" aria-label="Actions: activate to sort column ascending">Mở / khóa</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var hopital in Model)
+                                {
+                                    <tr role="row" class="even">
+                                        <td tabindex="0" class="sorting_1">
+                                            <a href="@Url.Action("Details", "Hospital", new { @id = hopital.idbv.Trim() })" class="text-info">@hopital.idbv</a>
+                                        </td>
+                                        <td><a href="@Url.Action("Details", "Hospital", new { @id = hopital.idbv.Trim() })" class="text-info">@hopital.tenbv</a></td>
+                                        <td>@hopital.IP</td>
+                                        <td>@hopital.dienthoai</td>
+                                        <td>@hopital.fax</td>
+                                        @{
+                                            var xa = ""; var huyen = ""; var tinh = "";
+                                            if (hopital.idxa != null)
+                                            {
+                                                xa = hopital.xa.tenxa;
+                                            }
+                                            if (hopital.huyen != null)
+                                            {
+                                                huyen = hopital.huyen.tenhuyen;
+                                            }
+                                            if (hopital.tinh != null)
+                                            {
+                                                tinh = hopital.tinh.tentinh;
+                                            }
+                                        }
+                                        <td>@xa - @huyen - @tinh</td>
+                                        <td>@hopital.diachi</td>
+
+                                        <td class="text-right">
+                                            @if (hopital.trangthai == true)
+                                            {
+                                                <i class="material-icons">done</i>
+                                            }
+                                            else
+                                            {
+                                                <i class="material-icons">clear</i>
+                                            }
+                                        </td>
+                                        <td>xx</td>
+
+                                    </tr>
+
+                                            }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="1" colspan="1">Id</th>
+                                    <th rowspan="1" colspan="1">Bệnh viện</th>
+                                    <th rowspan="1" colspan="1">Địa chỉ ip</th>
+                                    <th rowspan="1" colspan="1">Điện thoại</th>
+                                    <th rowspan="1" colspan="1">Email</th>
+                                    <th rowspan="1" colspan="1">Xã - Huyện - Tỉnh</th>
+                                    <th rowspan="1" colspan="1">Địa chỉ</th>
+
+                                    <th class="text-right" rowspan="1" colspan="1">Status</th>
+                                    <th class="text-right" rowspan="1" colspan="1">Mở / Khóa</th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+        <!-- end col-md-12 -->
+    </div>
+    <!-- end row -->
+</div>
